@@ -35,8 +35,8 @@ namespace ModularWPFTest
 
         private UserControl GetModuleContent(int moduleIndex)
         {
-            if (moduleIndex == 0) return new Module1();
-            return new Module2();
+            if (moduleIndex == 0) return new Module1View();
+            return new Module2View();
         }
     }
 }

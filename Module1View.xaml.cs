@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace ModularWPFTest
 {
     /// <summary>
-    /// Interaction logic for Module2.xaml
+    /// Interaction logic for Module1View.xaml
     /// </summary>
-    public partial class Module2 : UserControl
+    public partial class Module1View : UserControl
     {
-        public Module2()
+        public Module1View()
         {
             InitializeComponent();
         }
