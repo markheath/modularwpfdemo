@@ -7,7 +7,13 @@
             <ColumnDefinition Width="30*"></ColumnDefinition>
             <ColumnDefinition Width="80*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <ListBox x:Name="listBox" Grid.Column="0"></ListBox>
+        <ListBox x:Name="listBox"  Grid.Column="0">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
         <ContentPresenter x:Name="contentPresenter" Grid.Column="1"></ContentPresenter>
     </Grid>
 </Window>
