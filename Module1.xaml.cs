@@ -15,15 +15,13 @@ using System.Windows.Shapes;
 namespace ModularWPFTest
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Module1.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Module1 : UserControl
     {
-        public MainWindow()
+        public Module1()
         {
             InitializeComponent();
-            this.listBox.Items.Add("Module 1");
-            this.contentPresenter.Content = new Module1();
         }
     }
 }
