@@ -22,21 +22,15 @@ namespace ModularWPFTest
         public MainWindow()
         {
             InitializeComponent();
-            this.listBox.Items.Add("Module 1");
-            this.listBox.Items.Add("Module 2");
-            this.listBox.SelectionChanged += (sender, args) => LoadModule(this.listBox.SelectedIndex);
+            this.listBox.Items.Add(new Module1());
+            this.listBox.Items.Add(new Module2());
+            this.listBox.SelectionChanged += (sender, args) => LoadModule((IModule)this.listBox.SelectedItem);
             this.listBox.SelectedIndex = 0;
         }
 
-        private void LoadModule(int moduleIndex)
+        private void LoadModule(IModule module)
         {
-            this.contentPresenter.Content = GetModuleContent(moduleIndex);
-        }
-
-        private UserControl GetModuleContent(int moduleIndex)
-        {
-            if (moduleIndex == 0) return new Module1View();
-            return new Module2View();
+            this.contentPresenter.Content = module.UserInterface;
         }
     }
 }
