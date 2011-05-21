@@ -7,7 +7,7 @@
             <ColumnDefinition Width="30*"></ColumnDefinition>
             <ColumnDefinition Width="80*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <ListBox x:Name="listBox"  Grid.Column="0">
+        <ListBox x:Name="listBox" Grid.Column="0" ItemsSource="{Binding}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" />

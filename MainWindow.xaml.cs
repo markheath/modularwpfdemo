@@ -22,8 +22,6 @@ namespace ModularWPFTest
         public MainWindow()
         {
             InitializeComponent();
-            this.listBox.Items.Add(new Module1());
-            this.listBox.Items.Add(new Module2());
             this.listBox.SelectionChanged += (sender, args) => LoadModule((IModule)this.listBox.SelectedItem);
             this.listBox.SelectedIndex = 0;
         }

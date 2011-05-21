@@ -6,7 +6,7 @@ using System.Windows.Controls;
 
 namespace ModularWPFTest
 {
-    interface IModule
+    public interface IModule
     {
         string Name { get; }
         UserControl UserInterface { get; }

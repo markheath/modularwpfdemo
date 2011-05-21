@@ -12,5 +12,12 @@ namespace ModularWPFTest
     /// </summary>
     public partial class App : Application
     {
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+            var mainWindow = new MainWindow();
+            var modules = new IModule[] { new Module1(), new Module2() };
+            mainWindow.DataContext = modules;
+            mainWindow.Show();
+        }
     }
 }
