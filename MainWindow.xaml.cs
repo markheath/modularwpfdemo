@@ -23,7 +23,20 @@ namespace ModularWPFTest
         {
             InitializeComponent();
             this.listBox.Items.Add("Module 1");
-            this.contentPresenter.Content = new Module1();
+            this.listBox.Items.Add("Module 2");
+            this.listBox.SelectionChanged += (sender, args) => LoadModule(this.listBox.SelectedIndex);
+            this.listBox.SelectedIndex = 0;
+        }
+
+        private void LoadModule(int moduleIndex)
+        {
+            this.contentPresenter.Content = GetModuleContent(moduleIndex);
+        }
+
+        private UserControl GetModuleContent(int moduleIndex)
+        {
+            if (moduleIndex == 0) return new Module1();
+            return new Module2();
         }
     }
 }
