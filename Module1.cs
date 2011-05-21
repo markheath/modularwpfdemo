@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Controls;
+using System.ComponentModel.Composition;
 
 namespace ModularWPFTest
 {
+    [Export(typeof(IModule))]
     class Module1 : IModule
     {
         public string Name
