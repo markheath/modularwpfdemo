@@ -21,7 +21,7 @@ namespace ModularWPFTest
             var container = new CompositionContainer(catalog);
             var modules = container.GetExportedValues<IModule>();
 
-            mainWindow.DataContext = new MainWindowViewModel() { Modules = modules.ToList() };
+            mainWindow.DataContext = new MainWindowViewModel(modules);
             mainWindow.Show();
         }
     }

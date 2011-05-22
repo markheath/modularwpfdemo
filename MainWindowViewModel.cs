@@ -11,7 +11,16 @@ namespace ModularWPFTest
     {
         private IModule selectedModule;
 
-        public List<IModule> Modules { get; set; }
+        public MainWindowViewModel(IEnumerable<IModule> modules)
+        {
+            this.Modules = modules.OrderBy(m => m.Name).ToList();
+            if (this.Modules.Count > 0)
+            {
+                this.SelectedModule = this.Modules[0];
+            }
+        }
+
+        public List<IModule> Modules { get; private set; }
         
         public IModule SelectedModule 
         {
@@ -24,6 +33,7 @@ namespace ModularWPFTest
                 if (value != selectedModule)
                 {
                     selectedModule = value;
+                    RaisePropertyChanged("SelectedModule");
                     RaisePropertyChanged("UserInterface");
                 }
             } 
