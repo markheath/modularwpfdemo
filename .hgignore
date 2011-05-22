@@ -1,5 +1,6 @@
 syntax: glob
 obj/
 bin/
+TestResults/
 *.suo
 *.docstates
