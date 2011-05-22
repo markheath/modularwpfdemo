@@ -22,13 +22,6 @@ namespace ModularWPFTest
         public MainWindow()
         {
             InitializeComponent();
-            this.listBox.SelectionChanged += (sender, args) => LoadModule((IModule)this.listBox.SelectedItem);
-            this.listBox.SelectedIndex = 0;
-        }
-
-        private void LoadModule(IModule module)
-        {
-            this.contentPresenter.Content = module.UserInterface;
         }
     }
 }

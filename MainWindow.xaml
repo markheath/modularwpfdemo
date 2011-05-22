@@ -7,13 +7,16 @@
             <ColumnDefinition Width="30*"></ColumnDefinition>
             <ColumnDefinition Width="80*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <ListBox x:Name="listBox" Grid.Column="0" ItemsSource="{Binding}">
+        <ListBox x:Name="listBox" Grid.Column="0" 
+                 ItemsSource="{Binding Modules}" 
+                 SelectedItem="{Binding SelectedModule, Mode=TwoWay}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" />
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <ContentPresenter x:Name="contentPresenter" Grid.Column="1"></ContentPresenter>
+        <ContentPresenter x:Name="contentPresenter" Grid.Column="1" 
+                          Content="{Binding UserInterface}" />
     </Grid>
 </Window>
