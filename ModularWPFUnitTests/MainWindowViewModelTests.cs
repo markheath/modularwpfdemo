@@ -12,7 +12,6 @@ namespace ModularWPFUnitTests
     {
         class FakeModule : IModule
         {
-
             public string Name
             {
                 get { return "Fake Module"; }
@@ -23,12 +22,13 @@ namespace ModularWPFUnitTests
                 get { throw new NotImplementedException(); }
             }
         }
+
         [TestMethod]
         public void FirstModuleShouldBeSelectedByDefault()
         {
             FakeModule module = new FakeModule();
             MainWindowViewModel vm = new MainWindowViewModel(new FakeModule[] { module });
-
+            Assert.AreSame(vm.SelectedModule, module);
         }
     }
 }
