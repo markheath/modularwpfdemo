@@ -7,5 +7,7 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <TextBlock Margin="5" FontSize="20">This is Module 1</TextBlock>
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="79,42,0,0" Text="{Binding UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="209" />
+        <TextBlock Height="23" HorizontalAlignment="Left" Margin="12,45,0,0" Name="textBlock1" Text="User Name:" VerticalAlignment="Top" />
     </Grid>
 </UserControl>
