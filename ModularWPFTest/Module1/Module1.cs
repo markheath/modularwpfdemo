@@ -17,7 +17,12 @@ namespace ModularWPFTest
 
         public UserControl UserInterface
         {
-            get { return new Module1View(); }
+            get 
+            { 
+                var view = new Module1View();
+                view.DataContext = new Module1ViewModel();
+                return view;
+            }
         }
     }
 }
