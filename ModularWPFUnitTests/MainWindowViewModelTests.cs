@@ -18,5 +18,38 @@ namespace ModularWPFUnitTests
             MainWindowViewModel vm = new MainWindowViewModel(new IModule[] { module });
             Assert.AreSame(vm.SelectedModule, module);
         }
+
+        [TestMethod]
+        public void ShowsUserInterfaceOfSelectedModule()
+        {
+            var mock = new Mock<IModule>();
+            var ui = new Mock<System.Windows.Controls.UserControl>();
+            mock.Setup(m => m.UserInterface).Returns(ui.Object);
+            MainWindowViewModel vm = new MainWindowViewModel(new IModule[] { mock.Object });
+            Assert.AreSame(ui.Object, vm.UserInterface); 
+        }
+
+        [TestMethod]
+        public void IfNoModulesUserInterfaceReturnsNull()
+        {
+            MainWindowViewModel vm = new MainWindowViewModel(new IModule[] { });
+            Assert.IsNull(vm.UserInterface);
+        }
+
+        [TestMethod]
+        public void WhenSelectedModuleChangesPropertyChangedEventFires()
+        {
+            IModule module = new Mock<IModule>().Object;
+            IModule module2 = new Mock<IModule>().Object;
+            MainWindowViewModel vm = new MainWindowViewModel(new IModule[] { module, module2 });
+            List<string> propertiesChanged = new List<string>();
+            vm.PropertyChanged += (sender, args) => propertiesChanged.Add(args.PropertyName);
+
+            vm.SelectedModule = vm.Modules[1];
+
+            Assert.AreEqual(2, propertiesChanged.Count);
+            Assert.IsTrue(propertiesChanged.Contains("SelectedModule"));
+            Assert.IsTrue(propertiesChanged.Contains("UserInterface"));
+        }
     }
 }
