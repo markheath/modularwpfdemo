@@ -51,5 +51,20 @@ namespace ModularWPFUnitTests
             Assert.IsTrue(propertiesChanged.Contains("SelectedModule"));
             Assert.IsTrue(propertiesChanged.Contains("UserInterface"));
         }
+
+        [TestMethod]
+        public void WhenUserChangesModuleButCurrentlySelectedModuleRefusesChangeSelectedModuleShouldStayPut()
+        {
+            // setup a viewmodel with two modules
+            IModule module1 = new Mock<IModule>().Object;
+            IModule module2 = new Mock<IModule>().Object;
+            MainWindowViewModel vm = new MainWindowViewModel(new IModule[] { module1, module2 });
+
+            // change selection to the second module
+            vm.SelectedModule = module2;
+
+            // we want the first module still to be selected
+            Assert.AreSame(module1, vm.SelectedModule);
+        }
     }
 }
