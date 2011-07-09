@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Controls;
 using System.ComponentModel;
+using ModularWPFTest.MvvmUtils;
 
 namespace ModularWPFTest
 {
-    class MainWindowViewModel : INotifyPropertyChanged
+    class MainWindowViewModel : ViewModelBase
     {
         private IModule selectedModule;
 
@@ -39,14 +40,6 @@ namespace ModularWPFTest
             } 
         }
 
-        private void RaisePropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
         public UserControl UserInterface 
         { 
             get 
@@ -55,7 +48,5 @@ namespace ModularWPFTest
                 return SelectedModule.UserInterface; 
             } 
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 }
