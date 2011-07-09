@@ -19,5 +19,11 @@ namespace ModularWPFTest
         {
             get { return new Module2View(); }
         }
+
+
+        public bool CanExit
+        {
+            get { return true; }
+        }
     }
 }

@@ -24,5 +24,10 @@ namespace ModularWPFTest
                 return view;
             }
         }
+
+        public bool CanExit
+        {
+            get { throw new NotImplementedException(); }
+        }
     }
 }
