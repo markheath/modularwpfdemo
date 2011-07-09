@@ -39,9 +39,12 @@ namespace ModularWPFUnitTests
         [TestMethod]
         public void WhenSelectedModuleChangesPropertyChangedEventFires()
         {
-            IModule module = new Mock<IModule>().Object;
+            var module1Mock = new Mock<IModule>();
             IModule module2 = new Mock<IModule>().Object;
-            MainWindowViewModel vm = new MainWindowViewModel(new IModule[] { module, module2 });
+            module1Mock.SetupGet((x) => x.CanExit).Returns(true);
+            var module1 = module1Mock.Object;
+            
+            MainWindowViewModel vm = new MainWindowViewModel(new IModule[] { module1, module2 });
             List<string> propertiesChanged = new List<string>();
             vm.PropertyChanged += (sender, args) => propertiesChanged.Add(args.PropertyName);
 
@@ -56,8 +59,9 @@ namespace ModularWPFUnitTests
         public void WhenUserChangesModuleButCurrentlySelectedModuleRefusesChangeSelectedModuleShouldStayPut()
         {
             // setup a viewmodel with two modules
-            IModule module1 = new Mock<IModule>().Object;
+            var module1Mock = new Mock<IModule>();
             IModule module2 = new Mock<IModule>().Object;
+            var module1 = module1Mock.Object;
             MainWindowViewModel vm = new MainWindowViewModel(new IModule[] { module1, module2 });
 
             // change selection to the second module

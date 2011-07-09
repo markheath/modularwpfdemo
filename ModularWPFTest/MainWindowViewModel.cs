@@ -33,9 +33,12 @@ namespace ModularWPFTest
             {
                 if (value != selectedModule)
                 {
-                    selectedModule = value;
-                    RaisePropertyChanged("SelectedModule");
-                    RaisePropertyChanged("UserInterface");
+                    if (selectedModule == null || selectedModule.CanExit)
+                    {
+                        selectedModule = value;
+                        RaisePropertyChanged("SelectedModule");
+                        RaisePropertyChanged("UserInterface");
+                    }
                 }
             } 
         }
