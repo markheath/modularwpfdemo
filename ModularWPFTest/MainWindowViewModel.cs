@@ -5,19 +5,36 @@ using System.Text;
 using System.Windows.Controls;
 using System.ComponentModel;
 using ModularWPFTest.MvvmUtils;
+using System.Windows.Input;
 
 namespace ModularWPFTest
 {
     class MainWindowViewModel : ViewModelBase
     {
         private IModule selectedModule;
+        private readonly ICommand selectModuleCommand;
 
         public MainWindowViewModel(IEnumerable<IModule> modules)
         {
             this.Modules = modules.OrderBy(m => m.Name).ToList();
+            this.selectModuleCommand = new RelayCommand((x) => SelectModule((IModule)x));
             if (this.Modules.Count > 0)
             {
-                this.SelectedModule = this.Modules[0];
+                SelectModule(this.Modules[0]);
+            }            
+        }
+
+        public ICommand SelectModuleCommand { get { return selectModuleCommand; } }
+
+        private void SelectModule(IModule module)
+        {
+            if (selectedModule != module)
+            {
+                if (selectedModule == null || selectedModule.CanExit)
+                {
+                    selectedModule = module;
+                }
+                RaisePropertyChanged("UserInterface");
             }
         }
 
@@ -29,18 +46,6 @@ namespace ModularWPFTest
             { 
                 return selectedModule; 
             }
-            set 
-            {
-                if (value != selectedModule)
-                {
-                    if (selectedModule == null || selectedModule.CanExit)
-                    {
-                        selectedModule = value;
-                    }
-                    RaisePropertyChanged("SelectedModule");
-                    RaisePropertyChanged("UserInterface");
-                }
-            } 
         }
 
         public UserControl UserInterface 

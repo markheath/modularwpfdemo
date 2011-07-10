@@ -7,15 +7,16 @@
             <ColumnDefinition Width="30*"></ColumnDefinition>
             <ColumnDefinition Width="80*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <ListBox x:Name="listBox" Grid.Column="0" 
-                 ItemsSource="{Binding Modules}" 
-                 SelectedItem="{Binding SelectedModule, Mode=TwoWay}">
-            <ListBox.ItemTemplate>
+        <ItemsControl x:Name="listBox" Grid.Column="0" 
+                 ItemsSource="{Binding Modules}" >
+            <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Name}" />
+                    <Button Content="{Binding Name}" 
+                            Command="{Binding DataContext.SelectModuleCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}" 
+                            CommandParameter="{Binding}" />
                 </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
         <ContentPresenter x:Name="contentPresenter" Grid.Column="1" 
                           Content="{Binding UserInterface}" />
     </Grid>

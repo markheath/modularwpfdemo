@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModularWPFTest", "ModularWPFTest\ModularWPFTest.csproj", "{EFD0613F-DF0D-4F3E-9017-79A15AEDE9BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModularWPFUnitTests", "ModularWPFUnitTests\ModularWPFUnitTests.csproj", "{62BB416D-FCC3-4332-B2FB-85C13DFE78B8}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6E50BEC8-F39D-47DD-90C5-FAB51C96803F}"
 	ProjectSection(SolutionItems) = preProject
 		CodeCoverage.testsettings = CodeCoverage.testsettings
@@ -12,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		ModularWPFTest.vsmdi = ModularWPFTest.vsmdi
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModularWPFUnitTests", "ModularWPFUnitTests\ModularWPFUnitTests.csproj", "{62BB416D-FCC3-4332-B2FB-85C13DFE78B8}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution

@@ -48,10 +48,9 @@ namespace ModularWPFUnitTests
             List<string> propertiesChanged = new List<string>();
             vm.PropertyChanged += (sender, args) => propertiesChanged.Add(args.PropertyName);
 
-            vm.SelectedModule = vm.Modules[1];
+            vm.SelectModuleCommand.Execute(vm.Modules[1]);
 
-            Assert.AreEqual(2, propertiesChanged.Count);
-            Assert.IsTrue(propertiesChanged.Contains("SelectedModule"));
+            Assert.AreEqual(1, propertiesChanged.Count);
             Assert.IsTrue(propertiesChanged.Contains("UserInterface"));
         }
 
@@ -65,7 +64,7 @@ namespace ModularWPFUnitTests
             MainWindowViewModel vm = new MainWindowViewModel(new IModule[] { module1, module2 });
 
             // change selection to the second module
-            vm.SelectedModule = module2;
+            vm.SelectModuleCommand.Execute(module2);
 
             // we want the first module still to be selected
             Assert.AreSame(module1, vm.SelectedModule);

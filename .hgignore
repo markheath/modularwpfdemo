@@ -5,3 +5,4 @@ packages/
 TestResults/
 *.suo
 *.docstates
+*.user
