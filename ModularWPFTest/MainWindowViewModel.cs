@@ -11,13 +11,13 @@ namespace ModularWPFTest
 {
     class MainWindowViewModel : ViewModelBase
     {
-        private IModule selectedModule;
+        private ModuleViewModel selectedModule;
         private readonly ICommand selectModuleCommand;
 
         public MainWindowViewModel(IEnumerable<IModule> modules)
         {
-            this.Modules = modules.OrderBy(m => m.Name).ToList();
-            this.selectModuleCommand = new RelayCommand((x) => SelectModule((IModule)x));
+            this.Modules = modules.OrderBy(m => m.Name).Select(m => new ModuleViewModel(m)).ToList();
+            this.selectModuleCommand = new RelayCommand((x) => SelectModule((ModuleViewModel)x));
             if (this.Modules.Count > 0)
             {
                 SelectModule(this.Modules[0]);
@@ -26,13 +26,13 @@ namespace ModularWPFTest
 
         public ICommand SelectModuleCommand { get { return selectModuleCommand; } }
 
-        private void SelectModule(IModule module)
+        private void SelectModule(ModuleViewModel module)
         {
             if (selectedModule != module)
             {
                 if (selectedModule == null || selectedModule.CanExit)
                 {
-                    module.Load();
+                    module.Module.Load();
                     module.IsSelected = true;
                     if (selectedModule != null)
                         selectedModule.IsSelected = false;
@@ -42,13 +42,13 @@ namespace ModularWPFTest
             }
         }
 
-        public List<IModule> Modules { get; private set; }
+        public List<ModuleViewModel> Modules { get; private set; }
         
         public IModule SelectedModule 
         {
             get 
             { 
-                return selectedModule; 
+                return selectedModule == null ? null : selectedModule.Module; 
             }
         }
 

@@ -32,8 +32,5 @@ namespace ModularWPFTest
         {
             this.ui = new Module2View();
         }
-
-
-        public bool IsSelected { get; set; }
     }
 }

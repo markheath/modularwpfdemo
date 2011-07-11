@@ -93,6 +93,7 @@
     <Compile Include="Module2View.xaml.cs">
       <DependentUpon>Module2View.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ModuleViewModel.cs" />
     <Compile Include="MvvmUtils\RelayCommand.cs" />
     <Compile Include="MvvmUtils\ViewModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

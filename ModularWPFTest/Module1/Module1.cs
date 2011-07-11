@@ -54,8 +54,5 @@ namespace ModularWPFTest
                 ui.DataContext = viewModel;
             }
         }
-
-
-        public bool IsSelected { get; set; }
     }
 }

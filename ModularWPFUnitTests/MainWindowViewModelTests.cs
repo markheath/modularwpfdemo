@@ -58,7 +58,7 @@ namespace ModularWPFUnitTests
             MainWindowViewModel vm = builder.Build();
 
             // change selection to the second module
-            vm.SelectModuleCommand.Execute(builder.MockModules[1].Object);
+            vm.SelectModuleCommand.Execute(vm.Modules[1]);
 
             // check load was called on it
             builder.MockModules[1].Verify(x => x.Load());
@@ -73,7 +73,7 @@ namespace ModularWPFUnitTests
             // change selection to the second module
             vm.SelectModuleCommand.Execute(vm.Modules[1]);
 
-            builder.MockModules[1].VerifySet(x => x.IsSelected = true);            
+            Assert.IsTrue(vm.Modules[1].IsSelected);
         }
 
         [TestMethod]
@@ -86,7 +86,7 @@ namespace ModularWPFUnitTests
             vm.SelectModuleCommand.Execute(vm.Modules[1]);
 
             // check the first module gets unset
-            builder.MockModules[0].VerifySet(x => x.IsSelected = false);
+            Assert.IsFalse(vm.Modules[0].IsSelected);
         }
 
         [TestMethod]
@@ -99,7 +99,7 @@ namespace ModularWPFUnitTests
             MainWindowViewModel vm = new MainWindowViewModel(new IModule[] { module1, module2 });
 
             // change selection to the second module
-            vm.SelectModuleCommand.Execute(module2);
+            vm.SelectModuleCommand.Execute(vm.Modules[1]);
 
             // we want the first module still to be selected
             Assert.AreSame(module1, vm.SelectedModule);
