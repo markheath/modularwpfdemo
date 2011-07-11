@@ -7,16 +7,19 @@
             <ColumnDefinition Width="30*"></ColumnDefinition>
             <ColumnDefinition Width="80*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <ItemsControl x:Name="listBox" Grid.Column="0" 
+        <Border BorderThickness="1" BorderBrush="#808080">
+        <ItemsControl x:Name="listBox" Grid.Column="0"
                  ItemsSource="{Binding Modules}" >
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Button Content="{Binding Name}" 
                             Command="{Binding DataContext.SelectModuleCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}" 
-                            CommandParameter="{Binding}" />
+                            CommandParameter="{Binding}"                            
+                            Style="{StaticResource ResourceKey=ModuleButtonStyle}"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
+        </Border>
         <ContentPresenter x:Name="contentPresenter" Grid.Column="1" 
                           Content="{Binding UserInterface}" />
     </Grid>
