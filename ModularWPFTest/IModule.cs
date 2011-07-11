@@ -8,6 +8,7 @@ namespace ModularWPFTest
 {
     public interface IModule
     {
+        void Load();
         string Name { get; }
         UserControl UserInterface { get; }
         bool CanExit { get; }

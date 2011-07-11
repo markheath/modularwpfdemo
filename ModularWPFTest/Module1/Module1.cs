@@ -12,6 +12,7 @@ namespace ModularWPFTest
     class Module1 : IModule
     {
         private readonly Module1ViewModel viewModel = new Module1ViewModel();
+        private Module1View ui;
 
         public string Name
         {
@@ -22,9 +23,7 @@ namespace ModularWPFTest
         {
             get 
             { 
-                var view = new Module1View();
-                view.DataContext = viewModel;
-                return view;
+                return ui;
             }
         }
 
@@ -44,6 +43,15 @@ namespace ModularWPFTest
                     }
                 }
                 return canExit;
+            }
+        }
+
+        public void Load()
+        {
+            if (ui == null)
+            {
+                ui = new Module1View();
+                ui.DataContext = viewModel;
             }
         }
     }

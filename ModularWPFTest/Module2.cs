@@ -10,6 +10,8 @@ namespace ModularWPFTest
     [Export(typeof(IModule))]
     class Module2 : IModule
     {
+        private Module2View ui;
+
         public string Name
         {
             get { return "Module 2"; }
@@ -17,13 +19,18 @@ namespace ModularWPFTest
 
         public UserControl UserInterface
         {
-            get { return new Module2View(); }
+            get { return ui; }
         }
 
 
         public bool CanExit
         {
             get { return true; }
+        }
+
+        public void Load()
+        {
+            this.ui = new Module2View();
         }
     }
 }

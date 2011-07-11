@@ -55,6 +55,23 @@ namespace ModularWPFUnitTests
         }
 
         [TestMethod]
+        public void WhenAModuleIsSelectedItsLoadMethodMustBeCalled()
+        {
+            // setup a viewmodel with two modules
+            var module1Mock = new Mock<IModule>();
+            var module2Mock = new Mock<IModule>();
+            module1Mock.SetupGet((x) => x.CanExit).Returns(true);
+            var module1 = module1Mock.Object;
+            var module2 = module2Mock.Object;
+            MainWindowViewModel vm = new MainWindowViewModel(new IModule[] { module1, module2 });
+
+            // change selection to the second module
+            vm.SelectModuleCommand.Execute(module2);
+
+            module2Mock.Verify(x => x.Load());
+        }
+
+        [TestMethod]
         public void WhenUserChangesModuleButCurrentlySelectedModuleRefusesChangeSelectedModuleShouldStayPut()
         {
             // setup a viewmodel with two modules
