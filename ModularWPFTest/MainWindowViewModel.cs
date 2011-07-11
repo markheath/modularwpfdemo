@@ -33,6 +33,9 @@ namespace ModularWPFTest
                 if (selectedModule == null || selectedModule.CanExit)
                 {
                     module.Load();
+                    module.IsSelected = true;
+                    if (selectedModule != null)
+                        selectedModule.IsSelected = false;
                     selectedModule = module;
                     RaisePropertyChanged("UserInterface");
                 }

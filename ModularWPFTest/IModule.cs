@@ -12,5 +12,6 @@ namespace ModularWPFTest
         string Name { get; }
         UserControl UserInterface { get; }
         bool CanExit { get; }
+        bool IsSelected { get; set; }
     }
 }

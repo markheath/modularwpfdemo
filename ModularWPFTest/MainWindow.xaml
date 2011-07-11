@@ -14,7 +14,7 @@
                 <DataTemplate>
                     <Button Content="{Binding Name}" 
                             Command="{Binding DataContext.SelectModuleCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}" 
-                            CommandParameter="{Binding}"                            
+                            CommandParameter="{Binding}"  
                             Style="{StaticResource ResourceKey=ModuleButtonStyle}"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>

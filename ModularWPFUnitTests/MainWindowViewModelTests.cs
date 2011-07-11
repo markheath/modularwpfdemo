@@ -39,12 +39,9 @@ namespace ModularWPFUnitTests
         [TestMethod]
         public void WhenSelectedModuleChangesPropertyChangedEventFires()
         {
-            var module1Mock = new Mock<IModule>();
-            IModule module2 = new Mock<IModule>().Object;
-            module1Mock.SetupGet((x) => x.CanExit).Returns(true);
-            var module1 = module1Mock.Object;
+            var builder = new MainWindowViewModelBuilder(2);
+            MainWindowViewModel vm = builder.Build();
             
-            MainWindowViewModel vm = new MainWindowViewModel(new IModule[] { module1, module2 });
             List<string> propertiesChanged = new List<string>();
             vm.PropertyChanged += (sender, args) => propertiesChanged.Add(args.PropertyName);
 
@@ -57,18 +54,39 @@ namespace ModularWPFUnitTests
         [TestMethod]
         public void WhenAModuleIsSelectedItsLoadMethodMustBeCalled()
         {
-            // setup a viewmodel with two modules
-            var module1Mock = new Mock<IModule>();
-            var module2Mock = new Mock<IModule>();
-            module1Mock.SetupGet((x) => x.CanExit).Returns(true);
-            var module1 = module1Mock.Object;
-            var module2 = module2Mock.Object;
-            MainWindowViewModel vm = new MainWindowViewModel(new IModule[] { module1, module2 });
+            var builder = new MainWindowViewModelBuilder(2);
+            MainWindowViewModel vm = builder.Build();
 
             // change selection to the second module
-            vm.SelectModuleCommand.Execute(module2);
+            vm.SelectModuleCommand.Execute(builder.MockModules[1].Object);
 
-            module2Mock.Verify(x => x.Load());
+            // check load was called on it
+            builder.MockModules[1].Verify(x => x.Load());
+        }
+
+        [TestMethod]
+        public void WhenAModuleIsSelectectedItsIsSelectedPropertyMustGetSet()
+        {
+            var builder = new MainWindowViewModelBuilder(2);
+            MainWindowViewModel vm = builder.Build();
+
+            // change selection to the second module
+            vm.SelectModuleCommand.Execute(vm.Modules[1]);
+
+            builder.MockModules[1].VerifySet(x => x.IsSelected = true);            
+        }
+
+        [TestMethod]
+        public void WhenAModuleIsDeselectectedItsIsSelectedPropertyMustGetUnset()
+        {
+            var builder = new MainWindowViewModelBuilder(2);
+            MainWindowViewModel vm = builder.Build();
+
+            // change selection to the second module
+            vm.SelectModuleCommand.Execute(vm.Modules[1]);
+
+            // check the first module gets unset
+            builder.MockModules[0].VerifySet(x => x.IsSelected = false);
         }
 
         [TestMethod]
@@ -87,4 +105,26 @@ namespace ModularWPFUnitTests
             Assert.AreSame(module1, vm.SelectedModule);
         }
     }
+
+    class MainWindowViewModelBuilder
+    {
+        public MainWindowViewModelBuilder(int numberOfMockModules)
+        {
+            this.MockModules = new List<Mock<IModule>>();
+            for (int n = 0; n < numberOfMockModules; n++)
+            {
+                var mock = new Mock<IModule>();
+                mock.SetupGet((x) => x.CanExit).Returns(true);
+                this.MockModules.Add(mock);
+            }            
+        }
+
+        public List<Mock<IModule>> MockModules { get; private set; }
+
+        public MainWindowViewModel Build()
+        {
+            return new MainWindowViewModel(from m in this.MockModules select m.Object);
+        }
+    }
+
 }
