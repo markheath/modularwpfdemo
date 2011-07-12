@@ -63,7 +63,7 @@ namespace ModularWPFUnitTests
             // check load was called on it
             builder.MockModules[1].Verify(x => x.Load());
         }
-
+        
         [TestMethod]
         public void WhenAModuleIsSelectectedItsIsSelectedPropertyMustGetSet()
         {
